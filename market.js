@@ -48,3 +48,58 @@ class GoodsList {
         } else console.log('ТАкого элемента нет в каталоге')
     }
 }
+
+class BasketGood {
+    constructor(good, amount){
+        super(good.id, good.name, good.description, good.sizes, good.price, good.available);
+        this.amount = amount;
+    }
+}
+
+class Basket {
+    constructor(){
+        this.goods = [];
+    }
+
+    add(good, amount){
+        let alreadyInBasket = false;
+        for(let i=0; i<this.goods.length; i++){
+            if(good.id == this.goods[i].id){
+                this.goods[i].amount += amount;
+                alreadyInBasket = true;
+                break;
+            };
+        };
+
+        if(!alreadyInBasket){
+            this.goods.push(new BasketGood(good, amount));
+        };
+    }
+
+    remove(good, amount){
+        let idxItem = this.findIndex(item => item.id == good.id);
+        let resultAmount = this.goods[idxItem].amount - amount;
+        if(resultAmount > 0){
+            this.goods[idxItem].amount = resultAmount;
+        } else {this.goods.splice(idxItem, 1)}
+    }
+
+    clear(){
+        this.goods.splice(0, this.goods.length);
+    }
+
+    removeUnavailable(){
+        this.goods = this.goods.filter(good => good.available)
+    }
+
+    get totalAmount(){
+        let res = this.goods.reduce((sum, current) => sum + current.amount, 0)
+        return res
+    }
+
+    get totalSum(){
+        let res = this.goods.reduce((sum, current) => sum + current.amount * current.price, 0)
+        return res
+    }
+
+}
