@@ -49,7 +49,7 @@ class GoodsList {
     }
 }
 
-class BasketGood {
+class BasketGood extends Good{
     constructor(good, amount){
         super(good.id, good.name, good.description, good.sizes, good.price, good.available);
         this.amount = amount;
@@ -103,3 +103,18 @@ class Basket {
     }
 
 }
+
+let good1 = new Good(1, 'штаны красные', "штаны красные обыкновенные", ['m','l','xl'], 1000, true);
+let good2 = new Good(2, 'штаны синие', "штаны синие обыкновенные", ['l','xl'], 1100, true);
+let good3 = new Good(3, 'штаны зеленые', "штаны зеленые обыкновенные", ['m','l','xl'], 1200, false);
+let good4 = new Good(4, 'носки красные', "носки красные обыкновенные", ['l','xl'], 200, true);
+let good5 = new Good(5, 'носки зеленые', "носки зеленые обыкновенные", ['m','l','xl'], 210, true);
+let good6 = new Good(6, 'шапка меховая', "шапка меховая обыкновенная", ['xl'], 500, true);
+let good7 = new Good(7, 'шапка вязаная', "шапка вязаная обыкновенная", ['xl'], 300, false);
+console.log(good1,good2,good3,good4,good5,good6,good7)
+
+good3.setAvailable(false)
+console.log('штаны зеленые стали доступны: ', good3)
+
+
+
